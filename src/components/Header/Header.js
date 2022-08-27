@@ -22,20 +22,26 @@ const Header = () => {
             </button>
           </ActionGroup>
           <ActionGroup>
-            <UserLogo>
-              <button>
-                <User size={24} />
-              </button>
-            </UserLogo>
-            <Subscribe>
-              <Button>Subscribe</Button>
-              <a href='blank'>Already a subscriber?</a>
-            </Subscribe>
+            <button>
+              <User size={24} />
+            </button>
           </ActionGroup>
         </Row>
       </SuperHeader>
       <MainHeader>
+        <DesktopActionGroup>
+          <button>
+            <Search size={24} />
+          </button>
+          <button>
+            <Menu size={24} />
+          </button>
+        </DesktopActionGroup>
         <Logo />
+        <SubscribeWrapper>
+          <Button>Subscribe</Button>
+          <SubLink>Already a subscriber?</SubLink>
+        </SubscribeWrapper>
       </MainHeader>
     </header>
   );
@@ -47,9 +53,7 @@ const SuperHeader = styled.div`
   color: white;
 
   @media ${QUERIES.desktopAndUp} {
-    background: var(--color-gray-100);
-    color: var(--color-black);
-    margin-top: 20px;
+    display: none;
   }
 `;
 
@@ -71,19 +75,33 @@ const ActionGroup = styled.div`
   }
 `;
 
-const UserLogo = styled.span`
-  @media ${QUERIES.desktopAndUp} {
-    display: none;
+const DesktopActionGroup = styled(ActionGroup)`
+  display: none;
+
+  @media ${QUERIES.laptopAndUp} {
+    display: flex;
   }
 `;
 
-const Subscribe = styled.span`
+const SubscribeWrapper = styled.div`
   display: none;
 
-  @media ${QUERIES.desktopAndUp} {
-    display: flex;
-    flex-direction: column;
+  @media ${QUERIES.laptopAndUp} {
+    display: revert;
+    position: relative;
+    justify-self: end;
   }
+`;
+
+const SubLink = styled.a`
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: var(--color-gray-900);
+  font-style: italic;
+  text-decoration: underline;
 `;
 
 const MainHeader = styled(MaxWidthWrapper)`
@@ -93,8 +111,19 @@ const MainHeader = styled(MaxWidthWrapper)`
   margin-top: 32px;
   margin-bottom: 48px;
 
-  @media ${QUERIES.desktopAndUp} {
-    margin-top: -72px;
+  @media ${QUERIES.tabletAndUp} {
+    margin-top: 48px;
+    margin-bottom: 72px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    justify-content: revert;
+    justify-items: start;
+    margin-top: 16px;
+    margin-bottom: 72px;
   }
 `;
 
